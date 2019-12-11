@@ -7,7 +7,7 @@ pipeline {
         stage('Build Client App') {
             steps {
                 git branch: 'master', url: 'https://github.com/gnunn1/product-catalog-client'
-                sh "cd client && npm install && npm run build"
+                sh "npm install && npm run build"
             }
         }
         stage('Deploy Client App') {
