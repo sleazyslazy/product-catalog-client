@@ -16,7 +16,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject("product-catalog-dev") {
-                        openshift.selector("bc", "client").startBuild("--from-dir=client/dist", "--wait=true")
+                        openshift.selector("bc", "client").startBuild("--from-dir=dist", "--wait=true")
                         }
                     }
                 }
