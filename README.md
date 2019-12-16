@@ -1,9 +1,9 @@
-## REACT CRUD
-A simple CRUD application in React JS with PHP as the server-side language, and MySQL Database.
+## Product Catalog Client
 
-![alt tag](http://i63.tinypic.com/2vci87n.png)
+A simple client CRUD application in React JS which uses Quarkus as the API back-end.
 
-This tutorial covers only the basic aspects of how to create a simple CRUD application using ReactJS, so you won't find 'how to use Redux' or
- other topics in this sample.
+![alt text](https://raw.githubusercontent.com/gnunn1/product-catalog-tools/master/docs/img/screenshot.png)
+
+For complete information about this project, please see the [product-catalog-tools](https://github.com/gnunn1/product-catalog-tools) project.
 
 Note that this was forked from this [repo](https://github.com/andy1992/react-crud.git), original license remains in effect.
