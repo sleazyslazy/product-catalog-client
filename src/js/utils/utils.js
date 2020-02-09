@@ -26,9 +26,9 @@ export function authHeader() {
     let user = getUser();
 
     if (user && user.authData) {
-        return { 'Authorization': 'Basic ' + user.authData };
+        return { 'Authorization': 'Basic ' + user.authData , 'user_key': window.ENV.API_KEY };
     } else {
-        return {};
+        return {'user_key': window.ENV.API_KEY};
     }
 }
 

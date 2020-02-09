@@ -321,7 +321,11 @@ var ReadProductsComponent = React.createClass({
                 }
             }.bind(this));
 
-        this.serverRequest = $.get(getBackendURL('/api/product/count'), parameters,
+        this.serverRequest = $.get({
+                url: getBackendURL('/api/product/count'),
+                data: parameters,
+                headers: authHeader()
+            },
             function(data) {
                 this.setState({
                     count: data,
