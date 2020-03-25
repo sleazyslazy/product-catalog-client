@@ -165,7 +165,7 @@ var TopActionsComponent = React.createClass({
 var Loader = React.createClass({
     render: function() {
         if(this.props.isLoading == true) {
-            return <div className="text-center">Loading...</div>;
+            return <div className="alert alert-success">Loading...</div>;
         }
         return null;
     }
@@ -489,6 +489,8 @@ var ReadProductsComponent = React.createClass({
             $('.page-header h1').text('All Products');
         }
 
+        console.log("Render: " + this.state.loading);
+
         return (
             <div className="overflow-hidden">
                 <TopActionsComponent
@@ -498,20 +500,21 @@ var ReadProductsComponent = React.createClass({
                     deleteSelected={this.deleteSelected}
                     isLoggedIn={this.state.isLoggedIn}
                 />
-
-                <Loader isLoading={this.state.loading} />
-                <ProductsTable
-                    toggleAll={this.toggleAll}
-                    toggleOne={this.toggleOne}
-                    products={filteredProducts}
-                    orderBy={this.state.orderBy}
-                    orderType={this.state.orderType}
-                    sortClass={this.sortClass}
-                    sortChanged={this.sortChanged}
-                    selectedRows={this.state.selectedRows}
-                    isLoggedIn={this.state.isLoggedIn}
-                />
-
+                {this.state.loading?
+                    <Loader isLoading={this.state.loading} />
+                :
+                    <ProductsTable
+                        toggleAll={this.toggleAll}
+                        toggleOne={this.toggleOne}
+                        products={filteredProducts}
+                        orderBy={this.state.orderBy}
+                        orderType={this.state.orderType}
+                        sortClass={this.sortClass}
+                        sortChanged={this.sortChanged}
+                        selectedRows={this.state.selectedRows}
+                        isLoggedIn={this.state.isLoggedIn}
+                    />
+                }
                 <PaginationComponent
                     currentPage={this.props.currentPage}
                     search={this.props.search}
