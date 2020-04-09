@@ -9,7 +9,7 @@
     "build": "npm run webpack -- --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --progress",
-    "sonar": "mkdir -p coverage; node sonar-project.js",
+    "sonar": "node sonar-project.js",
     "clean": "rm -rf node_modules"
   },
   "keywords": [],
