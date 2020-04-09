@@ -1,5 +1,5 @@
 {
-  "name": "quarkus-product-catalog",
+  "name": "product-catalog-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,9 @@
     "dev": "npm run webpack -- --mode development --watch",
     "build": "npm run webpack -- --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack --progress"
+    "webpack": "webpack --progress",
+    "sonar": "mkdir -p coverage; node sonar-project.js",
+    "clean": "rm -rf node_modules"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +31,7 @@
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "sass-loader": "^8.0.0",
+    "sonarqube-scanner": "^2.6.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
