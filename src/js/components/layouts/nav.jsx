@@ -46,6 +46,7 @@ var NavComponent = React.createClass({
                             <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/24/phone-icon.png" alt="Best Electronics"/><span>  Best Electronics</span>
                         </a>
                     </div>
+                    
 
                     <div className="container">
                         {
