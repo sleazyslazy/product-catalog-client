@@ -3,8 +3,8 @@ metadata:
 projects:
   - name: product-catalog-client
     source:
-      location: https://github.com/gnunn-gitops/product-catalog-client.git
-      type: git
+      location: 'https://github.com/gnunn-gitops/product-catalog-client.git'
+      type: 'git'
 components:
   - id: che-incubator/typescript/latest
     memoryLimit: 512Mi
