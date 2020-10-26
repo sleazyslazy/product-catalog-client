@@ -1,0 +1,60 @@
+metadata:
+  name: product-catalog-client
+projects:
+  - name: product-catalog-client
+    source:
+      location: https://github.com/gnunn-gitops/product-catalog-client.git
+      type: git`
+components:
+  - id: che-incubator/typescript/latest
+    memoryLimit: 512Mi
+    type: chePlugin
+  - id: ms-vscode/node-debug2/latest
+    type: chePlugin
+  - mountSources: true
+    endpoints:
+      - name: nodejs
+        port: 9000
+    memoryLimit: 512Mi
+    type: dockerimage
+    image: >-
+      registry.redhat.io/codeready-workspaces/plugin-java8-rhel8:latest
+    alias: nodejs
+apiVersion: 1.0.0
+commands:
+  - name: Install
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/product-catalog-client'
+        type: exec
+        command: npm install
+        component: nodejs
+  - name: Run (and install)
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/product-catalog-client'
+        type: exec
+        command: npm install; npm dev
+        component: nodejs
+  - name: Run (Interactive dev)
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/product-catalog-client'
+        type: exec
+        command: npm install; npm start
+        component: nodejs
+  - name: Attach remote debugger
+    actions:
+      - referenceContent: |
+          {
+            "version": "0.2.0",
+            "configurations": [
+              {
+                "type": "node",
+                "request": "attach",
+                "name": "Attach to Remote",
+                "address": "localhost",
+                "port": 9229,
+                "localRoot": "${workspaceFolder}",
+                "remoteRoot": "${workspaceFolder}"
+              }
+            ]
+          }
+        type: vscode-launch
