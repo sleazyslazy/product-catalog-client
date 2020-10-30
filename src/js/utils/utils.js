@@ -25,17 +25,11 @@ export function authHeader() {
     // return authorization header with basic auth credentials
     let user = getUser();
 
-    var headers = {}
-
     if (user && user.authData) {
-        headers.push({ 'Authorization': 'Basic ' + user.authData });
+        return { 'Authorization': 'Basic ' + user.authData , 'user_key': window.ENV.API_KEY };
+    } else {
+        return {'user_key': window.ENV.API_KEY};
     }
-
-    if (window.ENV.API_KEY) {
-        headers.push({'user_key': window.ENV.API_KEY});
-    }
-
-    return headers;
 }
 
 // export function authHeader() {
