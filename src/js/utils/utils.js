@@ -38,6 +38,23 @@ export function authHeader() {
     return headers;
 }
 
+// export function authHeader() {
+//     // return authorization header with basic auth credentials
+//     let user = getUser();
+
+//     var headers = {}
+
+//     if (user && user.authData) {
+//         headers.push({ 'Authorization': 'Basic ' + user.authData });
+//     }
+
+//     if (window.ENV.API_KEY) {
+//         headers.push({'user_key': window.ENV.API_KEY});
+//     }
+
+//     return headers;
+// }
+
 export function isLoggedIn() {
     let user = getUser();
 
