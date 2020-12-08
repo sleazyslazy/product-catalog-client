@@ -47,6 +47,7 @@ var NavComponent = React.createClass({
                         </a>
                     </div>
 
+
                     <div className="container">
                         {
                             (!this.state.isLoggedIn) ?
