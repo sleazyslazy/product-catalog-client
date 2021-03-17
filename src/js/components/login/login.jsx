@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 
 import { isLoggedIn, getBackendURL, setUser, authHeader } from "../../utils/utils";
 
-var LoginComponent = React.createClass({
-    getInitialState: function() {
-        return {
-            id: null,
-            email: '',
-            password: '',
-            remember: null,
-            user: null,
-            successLogin: null,
-            isLoggedIn: false
-        };
-    },
+class LoginComponent extends React.Component {
+    state = {
+        id: null,
+        email: '',
+        password: '',
+        remember: null,
+        user: null,
+        successLogin: null,
+        isLoggedIn: false
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (isLoggedIn()) {
             this.setState({
                 isLoggedIn: true
@@ -26,25 +25,25 @@ var LoginComponent = React.createClass({
         }
 
         $('.page-header h1').text('Sign In');
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         //this.serverRequest.abort();
-    },
+    }
 
-    onEmailChanged: function(e) {
+    onEmailChanged = (e) => {
         this.setState({
             email: e.target.value
         });
-    },
+    };
 
-    onPasswordChanged: function(e) {
+    onPasswordChanged = (e) => {
         this.setState({
             password: e.target.value
         });
-    },
+    };
 
-    login: function(e) {
+    login = (e) => {
         $.post({
                 url: getBackendURL('/api/auth'),
                 data: {email: this.state.email, password: this.state.password},
@@ -62,9 +61,9 @@ var LoginComponent = React.createClass({
                 }
             }.bind(this));
         e.preventDefault();
-    },
+    };
 
-    render: function() {
+    render() {
         return (
             <div>
                 <div className="col-md-4"></div>
@@ -90,6 +89,6 @@ var LoginComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default LoginComponent;

@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 import { getBackendURL, authHeader, isLoggedIn } from "../../utils/utils";
 
-var UpdateProductComponent = React.createClass({
-    getInitialState:function() {
-        return {
-            id: 0,
-            name: '',
-            description: '',
-            price: 0,
-            selectedCategoryId: 0,
-            categories: [],
-            successUpdate: null,
-            isLoggedIn: false
-        };
-    },
+class UpdateProductComponent extends React.Component {
+    state = {
+        id: 0,
+        name: '',
+        description: '',
+        price: 0,
+        selectedCategoryId: 0,
+        categories: [],
+        successUpdate: null,
+        isLoggedIn: false
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         var productId = this.props.productId;
 
         if (isLoggedIn) {
@@ -49,30 +48,30 @@ var UpdateProductComponent = React.createClass({
                 $('.page-header h1').text(product.name);
             }.bind(this));
 
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         this.serverRequestCat.abort();
         this.serverRequestProd.abort();
-    },
+    }
 
-    onNameChange: function(e) {
+    onNameChange = (e) => {
         this.setState({name: e.target.value});
-    },
+    };
 
-    onCategoryChange: function(e) {
+    onCategoryChange = (e) => {
         this.setState({selectedCategoryId: e.target.value});
-    },
+    };
 
-    onDescriptionChange: function(e) {
+    onDescriptionChange = (e) => {
         this.setState({description: e.target.value});
-    },
+    };
 
-    onPriceChange: function(e) {
+    onPriceChange = (e) => {
         this.setState({price: e.target.value});
-    },
+    };
 
-    onSave: function(e) {
+    onSave = (e) => {
         var parameters = {
             id: this.state.id,
             name: this.state.name,
@@ -96,9 +95,9 @@ var UpdateProductComponent = React.createClass({
                 }.bind(this)
         });
         e.preventDefault();
-    },
+    };
 
-    render: function() {
+    render() {
         var categoriesOptions = this.state.categories.map(function(category) {
             return (
                 <option key={category.id} value={category.id}>{category.name}</option>
@@ -192,6 +191,6 @@ var UpdateProductComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default UpdateProductComponent;

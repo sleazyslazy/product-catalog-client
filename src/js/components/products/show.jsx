@@ -1,21 +1,20 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 
 import { getBackendURL, authHeader } from "../../utils/utils";
 
-var ReadOneProductComponent = React.createClass({
-    getInitialState: function() {
-        return {
-            id: 0,
-            name: '',
-            description: '',
-            price: 0,
-            category_name: ''
-        };
-    },
+class ReadOneProductComponent extends React.Component {
+    state = {
+        id: 0,
+        name: '',
+        description: '',
+        price: 0,
+        category_name: ''
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         var productId = this.props.productId;
 
         // load form values
@@ -31,13 +30,13 @@ var ReadOneProductComponent = React.createClass({
                 this.setState({description: product.description});
                 $('.page-header h1').text(product.name);
             }.bind(this));
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         this.serverRequestProd.abort();
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div>
                 <a href="#"
@@ -69,6 +68,6 @@ var ReadOneProductComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default ReadOneProductComponent;

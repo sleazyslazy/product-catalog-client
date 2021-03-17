@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 
@@ -11,8 +12,8 @@ import NavComponent from "./layouts/nav";
 import LoginComponent from "./login/login";
 import RegisterComponent from "./login/register";
 
-var NotFoundComponent = React.createClass({
-    render: function() {
+class NotFoundComponent extends React.Component {
+    render() {
         return (
             <div>
                 <div className="alert alert-danger">
@@ -31,17 +32,15 @@ var NotFoundComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
-var MainApp = React.createClass({
-    getInitialState: function() {
-        return {
-            currentMode: 'read',
-            productId: null
-        };
-    },
+class MainApp extends React.Component {
+    state = {
+        currentMode: 'read',
+        productId: null
+    };
 
-    changeAppMode: function(newMode, productId) {
+    changeAppMode = (newMode, productId) => {
         this.setState({
             currentMode: newMode
         });
@@ -51,9 +50,9 @@ var MainApp = React.createClass({
                 productId: productId
             });
         }
-    },
+    };
 
-    render: function() {
+    render() {
         var defaultItemPerPage = 5;
         var defaultSearchText = "";
         var defaultCurrentPage = 1;
@@ -147,7 +146,7 @@ var MainApp = React.createClass({
             </div>
         );
     }
-});
+}
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;

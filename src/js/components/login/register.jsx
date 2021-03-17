@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 
 import { isLoggedIn, getBackendURL } from "../../utils/utils";
 
 
-var RegisterComponent = React.createClass({
-    getInitialState: function() {
-        return {
-            email: '',
-            password: '',
-            passwordConfirmation: '',
-            user: null,
-            successRegister: null,
-            isLoggedIn: false
-        };
-    },
+class RegisterComponent extends React.Component {
+    state = {
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+        user: null,
+        successRegister: null,
+        isLoggedIn: false
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (isLoggedIn()) {
             this.setState({
                 isLoggedIn: true
@@ -25,13 +24,13 @@ var RegisterComponent = React.createClass({
         }
 
         $('.page-header h1').text('Sign Up');
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
 
-    },
+    }
 
-    login: function(e) {
+    login = (e) => {
         $.post(getBackendURL('/api/auth/register'), {
                 email: this.state.email,
                 password: this.state.password,
@@ -46,27 +45,27 @@ var RegisterComponent = React.createClass({
                 }
             }.bind(this));
         e.preventDefault();
-    },
+    };
 
-    onEmailChanged: function(e) {
+    onEmailChanged = (e) => {
         this.setState({
             email: e.target.value
         });
-    },
+    };
 
-    onPasswordChanged: function(e) {
+    onPasswordChanged = (e) => {
         this.setState({
             password: e.target.value
         });
-    },
+    };
 
-    onConfirmPasswordChanged: function(e) {
+    onConfirmPasswordChanged = (e) => {
         this.setState({
             passwordConfirmation: e.target.value
         });
-    },
+    };
 
-    render: function() {
+    render() {
         if(this.state.isLoggedIn )
             window.location.href = '#';
 
@@ -104,6 +103,6 @@ var RegisterComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default RegisterComponent;

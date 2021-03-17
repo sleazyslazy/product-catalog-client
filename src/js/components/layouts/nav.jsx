@@ -1,18 +1,17 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 
 import {getBackendURL, isLoggedIn, getUser, clearUser} from "../../utils/utils";
 
-var NavComponent = React.createClass({
-    getInitialState: function() {
-        return {
-            isLoggedIn: false,
-            user: ''
-        };
-    },
+class NavComponent extends React.Component {
+    state = {
+        isLoggedIn: false,
+        user: ''
+    };
 
-    logout: function() {
+    logout = () => {
         clearUser();
         console.log("Logged out");
         this.setState({
@@ -20,22 +19,22 @@ var NavComponent = React.createClass({
             user: ''
         })
         window.location.href = "#login";
-    },
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (isLoggedIn()) {
             this.setState({
                 isLoggedIn: true,
                 user: getUser()
             })
         }
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         //this.serverRequest.abort();
-    },
+    }
 
-    render: function() {
+    render() {
         return(
             <div>
                 <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light">
@@ -77,6 +76,6 @@ var NavComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default NavComponent;

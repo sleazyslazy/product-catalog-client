@@ -4,8 +4,8 @@ import $ from "jquery";
 
 import { getBackendURL, authHeader, isLoggedIn } from "../../utils/utils";
 
-var ProductRow = React.createClass({
-    render: function() {
+class ProductRow extends React.Component {
+    render() {
         return (
             <tr>
                 <td>
@@ -46,14 +46,14 @@ var ProductRow = React.createClass({
             </tr>
         );
     }
-});
+}
 
-var ProductsTable = React.createClass({
-    sortChanged: function(sortColumnName, order) {
+class ProductsTable extends React.Component {
+    sortChanged = (sortColumnName, order) => {
         this.props.sortChanged(sortColumnName, order);
-    },
+    };
 
-    render: function() {
+    render() {
         var rows = this.props.products.map(function(product, i) {
             return (
                 <ProductRow
@@ -110,11 +110,10 @@ var ProductsTable = React.createClass({
                 </table>
         );
     }
-});
+}
 
-var SearchByName = React.createClass({
-
-    render: function() {
+class SearchByName extends React.Component {
+    render() {
         return (
             <form role="search" action='#'>
                 <div className="input-group col-md-3 margin-bottom-1em float-left">
@@ -133,10 +132,10 @@ var SearchByName = React.createClass({
             </form>
         );
     }
-});
+}
 
-var TopActionsComponent = React.createClass({
-    render: function() {
+class TopActionsComponent extends React.Component {
+    render() {
         return (
             <div className="">
                 <SearchByName searchText={this.props.searchText} searchTerm={this.props.searchTerm} onInputSearchChange={this.props.onInputSearchChange} />
@@ -160,19 +159,19 @@ var TopActionsComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
-var Loader = React.createClass({
-    render: function() {
+class Loader extends React.Component {
+    render() {
         if(this.props.isLoading == true) {
             return <div className="alert alert-success">Loading...</div>;
         }
         return null;
     }
-});
+}
 
-var PaginationComponent = React.createClass({
-    render: function() {
+class PaginationComponent extends React.Component {
+    render() {
 
         // calculate number of pages depending on the total of records and the
         // "products per page" property
@@ -270,36 +269,34 @@ var PaginationComponent = React.createClass({
                 </nav>
         );
     }
-});
+}
 
-var ReadProductsComponent = React.createClass({
-    getInitialState: function() {
-        return {
-            search: this.props.search,
-            currentPage: this.props.currentPage,
-            limit: this.props.itemPerPage,
-            orderBy: this.props.orderBy,
-            orderType: this.props.orderType,
-            products: [],
-            count: 0,
-            loading: true,
-            selectedRows: [],
-            isLoggedIn: false
-        };
-    },
+class ReadProductsComponent extends React.Component {
+    state = {
+        search: this.props.search,
+        currentPage: this.props.currentPage,
+        limit: this.props.itemPerPage,
+        orderBy: this.props.orderBy,
+        orderType: this.props.orderType,
+        products: [],
+        count: 0,
+        loading: true,
+        selectedRows: [],
+        isLoggedIn: false
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         this.setState({
             isLoggedIn: isLoggedIn()
         })
         this.populateProducts();
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
         this.serverRequest.abort();
-    },
+    }
 
-    populateProducts: function() {
+    populateProducts = () => {
         var parameters = {
             name: this.state.search,
             page: this.state.currentPage,
@@ -314,11 +311,11 @@ var ReadProductsComponent = React.createClass({
                 headers: authHeader()
             },
             function(products) {
-                if(this.isMounted()) {
+                //if(this.isMounted()) {
                     this.setState({
                         products
                     });
-                }
+                //}
             }.bind(this));
 
         this.serverRequest = $.get({
@@ -332,9 +329,9 @@ var ReadProductsComponent = React.createClass({
                     loading: false
                 });
             }.bind(this));
-    },
+    };
 
-    onInputPageChange: function(e) {
+    onInputPageChange = (e) => {
         var page = parseInt(e.target.value);
         var totalPage = Math.ceil(this.state.count / this.state.limit);
 
@@ -345,16 +342,16 @@ var ReadProductsComponent = React.createClass({
         }
 
         this.setState({currentPage: page});
-    },
+    };
 
-    goToInputPage: function(e) {
+    goToInputPage = (e) => {
         e.preventDefault();
         if(this.state.currentPage){
             this.pageChanged(this.state.currentPage);
         }
-    },
+    };
 
-    pageChanged: function(destPage, e) {
+    pageChanged = (destPage, e) => {
         window.location.replace('#page=' + destPage + '&search=' + this.state.search + '&order_by=' + this.state.orderBy + '&order_type=' + this.state.orderType + '&item_per_page=' + this.state.limit);
 
         /**
@@ -367,9 +364,9 @@ var ReadProductsComponent = React.createClass({
         }, function() {
             this.populateProducts();
         });
-    },
+    };
 
-    sortChanged : function(sortColumnName, order){
+    sortChanged = (sortColumnName, order) => {
         this.setState({
             orderBy: sortColumnName,
             orderType: order.toString().toLowerCase() == 'asc' ? 'desc' : 'asc',
@@ -378,13 +375,13 @@ var ReadProductsComponent = React.createClass({
             this.populateProducts();
             this.pageChanged(1);
         });
-    },
+    };
 
-    sortClass : function(filterName){
+    sortClass = (filterName) => {
         return "fa fa-fw " + ((filterName == this.state.orderBy) ? ("fa-sort-" + this.state.orderType) : "fa-sort");
-    },
+    };
 
-    searchTerm: function(e) {
+    searchTerm = (e) => {
         window.location.replace('#page=' + this.state.currentPage + '&search=' + this.state.search + '&order_by=' + this.state.orderBy + '&order_type=' + this.state.orderType + '&item_per_page=' + this.state.limit);
         if(!e.target.value) {
             this.setState({
@@ -397,9 +394,9 @@ var ReadProductsComponent = React.createClass({
             this.setState({search: e.target.value});
         }
         e.preventDefault();
-    },
+    };
 
-    onInputSearchChanged: function(e) {
+    onInputSearchChanged = (e) => {
         if(!e.target.value){
             window.location.replace('#');
             this.setState({
@@ -413,9 +410,9 @@ var ReadProductsComponent = React.createClass({
                 search: e.target.value
             });
         }
-    },
+    };
 
-    toggleOne: function(checked, id) {
+    toggleOne = (checked, id) => {
         if(checked){
             this.setState({
                 selectedRows: this.state.selectedRows.concat([id])
@@ -425,9 +422,9 @@ var ReadProductsComponent = React.createClass({
                 selectedRows: this.state.selectedRows.filter((el) => el !== id)
             });
         }
-    },
+    };
 
-    toggleAll: function(e) {
+    toggleAll = (e) => {
         if(e.target.checked) {
             var selectedProducts = [];
             this.state.products.forEach(function(product) {
@@ -437,9 +434,9 @@ var ReadProductsComponent = React.createClass({
         } else {
             this.setState({selectedRows: []});
         }
-    },
+    };
 
-    deleteSelected: function() {
+    deleteSelected = () => {
         if(this.state.selectedRows.length > 0) {
             var r = confirm("Are you sure you want to delete the selected product(s)?");
             if (r == true) {
@@ -469,9 +466,9 @@ var ReadProductsComponent = React.createClass({
         } else {
             alert('Please select one or more products to be deleted.');
         }
-    },
+    };
 
-    itemPerPageChanged: function(e) {
+    itemPerPageChanged = (e) => {
         this.setState({
             limit: e.target.value,
             currentPage: 1
@@ -479,9 +476,9 @@ var ReadProductsComponent = React.createClass({
             this.populateProducts();
             this.pageChanged(1);
         });
-    },
+    };
 
-    render: function() {
+    render() {
         var filteredProducts = this.state.products;
         if(this.state.search != ''){
             $('.page-header h1').text('Search "'+ this.state.search +'"');
@@ -529,6 +526,6 @@ var ReadProductsComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default ReadProductsComponent;

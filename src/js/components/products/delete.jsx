@@ -1,16 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from "react";
 import ReactDOM from "react-dom";
 import $ from "jquery";
 import { getBackendURL, authHeader, isLoggedIn } from "../../utils/utils";
 
-var DeleteProductComponent = React.createClass({
-    getInitialState:function() {
-        return {
-            isLoggedIn: false
-        };
-    },
+class DeleteProductComponent extends React.Component {
+    state = {
+        isLoggedIn: false
+    };
 
-    componentDidMount: function() {
+    componentDidMount() {
         if (isLoggedIn) {
             this.setState({
                 isLoggedIn: isLoggedIn()
@@ -19,13 +18,13 @@ var DeleteProductComponent = React.createClass({
             window.location.href = '#';
         }
         $('.page-header h1').text('Delete Product');
-    },
+    }
 
-    componentWillUnmount: function() {
+    componentWillUnmount() {
 
-    },
+    }
 
-    onDelete: function(e) {
+    onDelete = (e) => {
         var productId = this.props.productId;
 
         $.post({
@@ -38,9 +37,9 @@ var DeleteProductComponent = React.createClass({
                 window.location.replace('#');
             }.bind(this)
         );
-    },
+    };
 
-    render: function() {
+    render() {
 
         return (
             <div className="row">
@@ -68,6 +67,6 @@ var DeleteProductComponent = React.createClass({
             </div>
         );
     }
-});
+}
 
 export default DeleteProductComponent;
