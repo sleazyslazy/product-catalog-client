@@ -1,7 +1,9 @@
 const sonarqubeScanner =  require('sonarqube-scanner');
+const { EnvironmentPlugin } = require('webpack');
 sonarqubeScanner(
     {
-        serverUrl:  'http://sonarqube.dev-tools:9000',
+        serverUrl:  process.env.SONAR_SERVER_URL,
+        //serverUrl:  'http://sonarqube.dev-tools:9000',
         //serverUrl:  'http://localhost:9000',
         options : {
             'sonar.sources':  'src',
