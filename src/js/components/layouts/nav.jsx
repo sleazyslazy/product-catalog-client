@@ -40,13 +40,13 @@ class NavComponent extends React.Component {
                 <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light">
                     {/* Remove comment block below to show change  */}
                     
-                    
+                    {/*
                     <div className="navbar-header">
                         <a className="navbar-brand" href="http://github.com/gnunn1/openshift-basic-pipeline">
                             <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/24/phone-icon.png" alt="Best Electronics"/><span>  Best Electronics</span>
                         </a>
                     </div>
-                    
+                    */}
 
                     <div className="container">
                         {
