@@ -6,7 +6,7 @@ export function getBackendURL(path) {
     let domain = window.ENV.API_URL;
     if (!domain) {
         domain = window.location.host;
-        console.log("Using domain " + domain);
+        console.log("Using client domain " + domain+ " to determine server location");
         // Handle case in openshift to change route to server
         domain = domain.replace("client", "server");
         // Handle case for local development

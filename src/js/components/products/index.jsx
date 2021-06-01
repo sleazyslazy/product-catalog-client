@@ -486,8 +486,6 @@ class ReadProductsComponent extends React.Component {
             $('.page-header h1').text('All Products');
         }
 
-        console.log("Render: " + this.state.loading);
-
         return (
             <div className="overflow-hidden">
                 <TopActionsComponent
