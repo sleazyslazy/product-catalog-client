@@ -47,6 +47,7 @@ class NavComponent extends React.Component {
                         </a>
                     </div>
                     */}
+                 
 
                     <div className="container">
                         {
