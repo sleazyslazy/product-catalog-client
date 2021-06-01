@@ -1,9 +1,21 @@
 import $ from "jquery";
 
 export function getBackendURL(path) {
-    //let result = "http://localhost:8080" + path;
-    let result = window.ENV.API_URL + path;
-    console.log("Accessing path " + result);
+    //let domain = "http://localhost:8080" + path;
+    //If no domain use the hostname to derive it
+    let domain = window.ENV.API_URL;
+    if (!domain) {
+        domain = window.location.host;
+        console.log("Using domain " + domain);
+        // Handle case in openshift to change route to server
+        domain = domain.replace("client", "server");
+        // Handle case for local development
+        domain = domain.replace("9000", "8080");
+        domain = "http://" + domain;
+    }
+
+    let result = domain + path;
+    console.log("Using path " + result);
     return result;
 }
 
