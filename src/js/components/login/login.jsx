@@ -51,7 +51,7 @@ class LoginComponent extends React.Component {
             },
             function(result) {
                 this.setState({
-                    successLogin: result.message
+                    successLogin: "true"
                 });
                 if(result.user != null) {
                     this.setState({id: result.user.id});
@@ -59,7 +59,12 @@ class LoginComponent extends React.Component {
                     setUser(result.user, btoa(this.state.email + ':' + this.state.password));
                     window.location.reload();
                 }
+            }.bind(this)).fail(function() {
+                this.setState({
+                    successLogin: "Login failed, unauthorized"
+                });
             }.bind(this));
+
         e.preventDefault();
     };
 
