@@ -11,7 +11,7 @@ export function getBackendURL(path) {
         domain = domain.replace("client", "server");
         // Handle case for local development
         domain = domain.replace("9000", "8080");
-        domain = "http://" + domain;
+        domain = window.location.protocol + "://" + domain;
     }
 
     let result = domain + path;
