@@ -13,11 +13,12 @@ export function getBackendURL(path) {
         domain = domain.replace("9000", "8080");
         if (!window.location.protocol) {
             domain = "https://" + domain;
+            console.log("No protocol, using client domain: " + domain);
         } else {
             domain = window.location.protocol + "://" + domain;
+            console.log("Protocol " + protocol + " is set, using client domain: " + domain);
         }
     }
-
     let result = domain + path;
     console.log("Using path " + result);
     return result;
