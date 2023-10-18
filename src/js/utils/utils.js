@@ -15,7 +15,7 @@ export function getBackendURL(path) {
             domain = "https://" + domain;
             console.log("No protocol, using client domain: " + domain);
         } else {
-            domain = window.location.protocol + "://" + domain;
+            domain = window.location.protocol + "//" + domain;
             console.log("Protocol " + window.location.protocol + " is set, using client domain: " + domain);
         }
     }
