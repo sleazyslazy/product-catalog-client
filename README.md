@@ -1,4 +1,4 @@
-## Product Catalog Client
+### Product Catalog Client
 
 A simple client CRUD application in React JS which uses Quarkus as the API back-end.
 
